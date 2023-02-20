@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { CardGroup, Card } from "react-bootstrap";
-import moviesData from "./data/movies.json";
+import { CardGroup, Card, Button } from "react-bootstrap";
 
-function MovieReviews() {
-  const [movieReviews, setMovieReviews] = useState(moviesData);
+function MovieReviews(props) {
+
+  const removeMovie = (movie) => {
+    const index = props.movies.indexOf(movie);
+    delete props.movies[index];
+    document.getElementById(movie.id).remove();
+  };
 
   return (
     <div className="d-flex">
       <CardGroup>
-        {movieReviews.map((movie) => (
-          <Card key={movie.id}>
+        {props.movies.map((movie) => (
+          <Card key={movie.id} id={movie.id}>
             <Card.Img
               variant="top"
               src={movie.image}
@@ -21,6 +25,7 @@ function MovieReviews() {
               <Card.Text>{movie.releaseDate}</Card.Text>
               <Card.Text>{movie.actors.join(", ")}</Card.Text>
               <Card.Text>{movie.rating}/5</Card.Text>
+              <Button onClick={() => removeMovie(movie)}>Remove</Button>
             </Card.Body>
           </Card>
         ))}
