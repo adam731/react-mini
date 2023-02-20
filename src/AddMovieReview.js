@@ -14,6 +14,7 @@ function AddMovieReview(props) {
     console.log("Actors:", actors);
     console.log("Image URL:", image);
     console.log("Rating:", rating);
+    alert("Movie Added");
     props.movies.push({
       id: props.movies.length + 1,
       name: name,
@@ -23,6 +24,11 @@ function AddMovieReview(props) {
       rating: rating,
     });
     event.target.reset();
+    setName(""); // Clear the state of the form inputs
+    setReleaseDate("");
+    setActors("");
+    setImage("");
+    setRating("");
   };
 
   return (

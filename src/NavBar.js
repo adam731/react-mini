@@ -10,6 +10,7 @@ function NavBar() {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
         <Link to="/">Movies</Link>
+        <span style={{width: "10px"}}></span>
           <Link to="/add-review">Add Review</Link>
         </Nav>
       </Navbar.Collapse>
