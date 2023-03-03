@@ -7,28 +7,23 @@ function AddMovieReview(props) {
   const [image, setImage] = useState("");
   const [rating, setRating] = useState("");
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Name:", name);
-    console.log("Release Date:", releaseDate);
-    console.log("Actors:", actors);
-    console.log("Image URL:", image);
-    console.log("Rating:", rating);
-    alert("Movie Added");
-    props.movies.push({
-      id: props.movies.length + 1,
-      name: name,
-      releaseDate: releaseDate,
-      actors: actors.split(","),
-      image: image,
-      rating: rating,
-    });
-    event.target.reset();
-    setName(""); // Clear the state of the form inputs
-    setReleaseDate("");
-    setActors("");
-    setImage("");
-    setRating("");
+  const handleSubmit = () => {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: props.movies.length + 1,
+        name: name,
+        releaseDate: releaseDate,
+        actors: actors.split(","),
+        image: image,
+        rating: rating,
+      }),
+    };
+    fetch("/AddMovieReview", requestOptions)
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -36,7 +31,7 @@ function AddMovieReview(props) {
       <h2>Add Movie Review</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name</label>
-        <input
+        <form
           type="text"
           id="name"
           name="name"
@@ -67,10 +62,10 @@ function AddMovieReview(props) {
 
         <label htmlFor="image">Image URL</label>
         <input
-          type="url"
+          type="file"
           id="image"
           name="image"
-          value={image}
+          //value={image}
           onChange={(event) => setImage(event.target.value)}
           required
         />
