@@ -1,4 +1,4 @@
-import {useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MovieReviews from "./MovieReviews.js";
@@ -10,10 +10,10 @@ function App() {
   const [movieReviews, setMovieReviews] = useState(null);
 
   useEffect(() => {
-    fetch("/movieReviews")
-    .then((res) => res.json())
-    .then(setMovieReviews)
-    .catch((err) => console.log(err));
+    fetch("/api/movieReviews")
+      .then((res) => res.json())
+      .then(setMovieReviews)
+      .catch((err) => console.log(err));
   }, []);
 
   if (movieReviews == null) {

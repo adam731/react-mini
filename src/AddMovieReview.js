@@ -20,7 +20,7 @@ function AddMovieReview(props) {
         rating: rating,
       }),
     };
-    fetch("/AddMovieReview", requestOptions)
+    fetch("/api/AddMovieReview", requestOptions)
       .then((response) => response.json())
       .then((data) => console.log(data))
       .catch((error) => console.log(error));
@@ -29,9 +29,13 @@ function AddMovieReview(props) {
   return (
     <div>
       <h2>Add Movie Review</h2>
-      <form onSubmit={handleSubmit}>
+      <form
+        method="post"
+        action="/api/AddMovieReview"
+        enctype="multipart/form-data"
+      >
         <label htmlFor="name">Name</label>
-        <form
+        <input
           type="text"
           id="name"
           name="name"
@@ -44,7 +48,7 @@ function AddMovieReview(props) {
         <input
           type="date"
           id="release-date"
-          name="release-date"
+          name="releaseDate"
           value={releaseDate}
           onChange={(event) => setReleaseDate(event.target.value)}
           required
